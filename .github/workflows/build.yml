@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+      - name: Install setuptools
+        run: sudo apt install python3-setuptools
       - name: Install requirements
         run: make requirements
       - name: Build code
