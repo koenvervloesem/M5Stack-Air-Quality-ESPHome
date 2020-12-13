@@ -12,6 +12,6 @@ jobs:
       - name: Install setuptools
         run: sudo apt install python3-setuptools
       - name: Install requirements
-        run: make requirements
+        run: sudo make requirements
       - name: Build code
         run: make build
