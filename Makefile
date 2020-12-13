@@ -10,7 +10,8 @@ clean:
 	rm -r $(BUILD_DIR)
 
 requirements:
-	pip3 install https://github.com/esphome/esphome/archive/dev.zip
+	pip3 install wheel
+	pip3 install pillow https://github.com/esphome/esphome/archive/dev.zip
 
 run:
 	esphome $(YAML_FILE) run
