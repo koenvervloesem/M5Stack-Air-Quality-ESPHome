@@ -1,0 +1,145 @@
+esphome:
+  name: m5stack_air_quality
+  platform: ESP32
+  board: m5stack-core-esp32
+  libraries:
+    - "uFire SHT20"
+    - "ArduinoJson"
+  includes:
+    - include/sht20.h
+
+logger:
+
+# Define I/O: UART, I²C and SPI
+uart:
+  rx_pin: 16
+  baud_rate: 9600
+
+i2c:
+  sda: 21
+  scl: 22
+  scan: true
+  frequency: 200kHz
+
+spi:
+  clk_pin: 18
+  mosi_pin: 23
+  miso_pin: 19
+
+# Particulate matter sensor and temperature sensor
+sensor:
+  - platform: pmsx003
+    type: PMSX003
+    pm_1_0:
+      name: "PM1"
+      id: sensor_pm1
+      filters:
+        - sliding_window_moving_average:
+            window_size: 180
+            send_every: 60
+    pm_2_5:
+      name: "PM2.5"
+      id: sensor_pm25
+      filters:
+        - sliding_window_moving_average:
+            window_size: 180
+            send_every: 60
+    pm_10_0:
+      name: "PM10"
+      id: sensor_pm10
+      filters:
+        - sliding_window_moving_average:
+            window_size: 180
+            send_every: 60
+  - platform: custom
+    lambda: |-
+      auto sht20 = new SHT20();
+      App.register_component(sht20);
+      return {sht20->temperature_sensor, sht20->humidity_sensor, sht20->vpd_sensor, sht20->dew_point_sensor};
+    sensors:
+      - name: "Temperature"
+        id: sensor_temperature
+        unit_of_measurement: °C
+        accuracy_decimals: 2
+      - name: "Humidity"
+        id: sensor_humidity
+        unit_of_measurement: "%"
+        accuracy_decimals: 2
+      - name: "Vapour-pressure deficit"
+        id: sensor_vpd
+        unit_of_measurement: "kPa"
+        accuracy_decimals: 2
+      - name: "Dew point"
+        id: sensor_dew_point
+        unit_of_measurement: °C
+        accuracy_decimals: 2
+
+# Button to toggle the display backlight
+binary_sensor:
+  - platform: gpio
+    id: M5_BtnB
+    pin:
+      number: 38
+      inverted: true
+    on_click:
+      then:
+        - switch.toggle: backlight
+
+# GPIO pin of the display backlight
+switch:
+  - platform: gpio
+    pin: 32
+    name: "Backlight"
+    id: backlight
+    restore_mode: ALWAYS_ON
+
+# Download Roboto font from https://fonts.google.com/specimen/Roboto
+font:
+  - file: "fonts/Roboto-Medium.ttf"
+    id: font_roboto_medium22
+    size: 22
+    glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
+
+display:
+  - platform: ili9341
+    id: m5stack_display
+    model: M5Stack
+    cs_pin: 14
+    dc_pin: 27
+    led_pin: 32
+    reset_pin: 33
+    rotation: 0
+    lambda: |-
+      Color RED(1,0,0);
+      Color BLUE(0,0,1);
+      Color WHITE(1,1,1);
+
+      it.rectangle(0,  0, it.get_width(), it.get_height(), BLUE);
+      it.rectangle(0, 22, it.get_width(), it.get_height(), BLUE);   // header bar
+      it.print(it.get_width() / 2, 11, id(font_roboto_medium22), RED, TextAlign::CENTER, "Particulate matter");
+
+      it.print(11,  33, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "PM1");
+      it.print(11,  55, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "PM2.5");
+      it.print(11,  77, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "PM10");
+
+      it.printf(it.get_width() - 11,  33, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f µg/m³", id(sensor_pm1).state);
+      it.printf(it.get_width() - 11,  55, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f µg/m³", id(sensor_pm25).state);
+      it.printf(it.get_width() - 11,  77, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f µg/m³", id(sensor_pm10).state);
+
+      it.rectangle(0, 110, it.get_width(), 22, BLUE);   // header bar
+      it.print(it.get_width() / 2, 121, id(font_roboto_medium22), RED, TextAlign::CENTER, "Environment");
+
+      it.print(11, 143, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "T");
+      it.print(11, 165, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "H");
+      it.print(11, 187, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "VPD");
+      it.print(11, 209, id(font_roboto_medium22), WHITE, TextAlign::LEFT, "Tdp");
+
+      it.printf(it.get_width() - 77, 143, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f", id(sensor_temperature).state);
+      it.printf(it.get_width() - 77, 165, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f", id(sensor_humidity).state);
+      it.printf(it.get_width() - 77, 187, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f", id(sensor_vpd).state);
+      it.printf(it.get_width() - 77, 209, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%.0f", id(sensor_dew_point).state);
+
+      it.printf(it.get_width() - 11, 143, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "°C");
+      it.printf(it.get_width() - 11, 165, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "%%");
+      it.printf(it.get_width() - 11, 187, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "kPa");
+      it.printf(it.get_width() - 11, 209, id(font_roboto_medium22), WHITE, TextAlign::RIGHT, "°C");

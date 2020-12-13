@@ -1,0 +1,15 @@
+---
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Install requirements
+        run: make requirements
+      - name: Build code
+        run: make build
