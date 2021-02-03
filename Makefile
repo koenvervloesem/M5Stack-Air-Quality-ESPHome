@@ -11,7 +11,7 @@ clean:
 
 requirements:
 	pip3 install wheel
-	pip3 install pillow https://github.com/esphome/esphome/archive/dev.zip
+	pip3 install pillow esphome
 
 run:
 	esphome $(YAML_FILE) run

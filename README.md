@@ -13,9 +13,9 @@ This [ESPHome](https://esphome.io) configuration builds firmware for M5Stack's [
 ## Requirements
 
 * M5Stack's [PM2.5 Air Quality Kit (PMSA003 + SHT20)](https://m5stack.com/products/pm-2-5-sensor-usb-power-sht20)
-* The development version of ESPHome. The 1.15.3 release doesn't have support for the M5Stack Core's [ili9341 display](https://github.com/esphome/esphome/pull/1233) yet. See the [installation instructions for ESPHome's bleeding edge version](https://esphome.io/guides/faq.html#how-do-i-use-the-latest-bleeding-edge-version).
+* ESPHome 1.16.0 or later.
 
-The SHT20 sensor is also not supported by ESPHome, but this repository adds a custom component that's using the Arduino library [uFire_SHT20](https://github.com/u-fire/uFire_SHT20) which supports the sensor.
+The SHT20 sensor is not supported by ESPHome, but this repository adds a custom component that's using the Arduino library [uFire_SHT20](https://github.com/u-fire/uFire_SHT20) which supports the sensor.
 
 ## Usage
 
