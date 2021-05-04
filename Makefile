@@ -11,7 +11,7 @@ clean:
 
 requirements:
 	pip3 install wheel
-	pip3 install pillow esphome
+	pip3 install -r requirements.txt
 
 run:
 	esphome $(YAML_FILE) run
