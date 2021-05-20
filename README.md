@@ -41,7 +41,10 @@ But even this doesn't solve the problem. I suspect M5Stack's hardware design is 
 
 * Change the interface to something nicer. I'm not a designer, so I welcome any suggestions or pull requests.
 * Use the left and right buttons for other tasks.
-* Find a solution for the faulty SHT20.
+
+## Learn more about ESPHome
+
+If you want to learn more about ESPHome, read my book [Getting Started with ESPHome: Develop your own custom home automation devices](https://koen.vervloesem.eu/books/getting-started-with-esphome/) and the accompanying GitHub repository [koenvervloesem/Getting-Started-with-ESPHome](https://github.com/koenvervloesem/Getting-Started-with-ESPHome/).
 
 ## License
 
