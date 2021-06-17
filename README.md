@@ -22,7 +22,7 @@ The SHT20 sensor is not supported by ESPHome, but this repository adds a custom 
 Compile and upload the firmware to your M5Stack air quality kit with:
 
 ```shell
-esphome m5stack_air_quality.yaml run
+esphome run m5stack_air_quality.yaml
 ```
 
 The YAML file doesn't configure any Wi-Fi connection, MQTT broker or native API for Home Assistant. You can add this yourself. The configuration has been tested extensively with MQTT. If you have set up Home Assistant MQTT discovery, the sensors of the device even automatically show up in Home Assistant.
