@@ -100,6 +100,20 @@ font:
     size: 22
     glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
 
+color:
+  - id: RED
+    red: 100%
+    green: 0%
+    blue: 0%
+  - id: BLUE
+    red: 0%
+    green: 0%
+    blue: 100%
+  - id: WHITE
+    red: 100%
+    green: 100%
+    blue: 100%
+
 display:
   - platform: ili9341
     id: m5stack_display
@@ -110,10 +124,6 @@ display:
     reset_pin: 33
     rotation: 0
     lambda: |-
-      Color RED(1,0,0);
-      Color BLUE(0,0,1);
-      Color WHITE(1,1,1);
-
       it.rectangle(0,  0, it.get_width(), it.get_height(), BLUE);
       it.rectangle(0, 22, it.get_width(), it.get_height(), BLUE);   // header bar
       it.print(it.get_width() / 2, 11, id(font_roboto_medium22), RED, TextAlign::CENTER, "Particulate matter");
