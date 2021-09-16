@@ -1,2 +1,2 @@
-pillow==8.2.0
-esphome==2021.8.0
+pillow==8.3.2
+esphome==2021.9.0
