@@ -5,9 +5,10 @@ esphome:
   libraries:
     - "uFire SHT20"
     - "ArduinoJson"
-    - "Wire"
   includes:
     - include/sht20.h
+  platformio_options:
+    lib_ldf_mode: chain
 
 logger:
 
