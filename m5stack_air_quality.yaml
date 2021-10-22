@@ -3,12 +3,11 @@ esphome:
   platform: ESP32
   board: m5stack-core-esp32
   libraries:
+    - "Wire"
     - "uFire SHT20"
     - "ArduinoJson"
   includes:
     - include/sht20.h
-  platformio_options:
-    lib_ldf_mode: chain
 
 logger:
 
