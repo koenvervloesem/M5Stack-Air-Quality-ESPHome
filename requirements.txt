@@ -1,2 +1,2 @@
-esphome==2021.12.0
+esphome==2022.1.0
 pillow==9.0.0
