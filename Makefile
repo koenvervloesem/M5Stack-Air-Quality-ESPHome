@@ -1,13 +1,9 @@
-BUILD_DIR = m5stack_air_quality
-YAML_FILE = $(BUILD_DIR).yaml
+YAML_FILE = m5stack-air-quality-kit.yaml
 
-.PHONY: build clean requirements run
+.PHONY: build requirements run
 
 build:
 	esphome compile $(YAML_FILE)
-
-clean:
-	rm -r $(BUILD_DIR)
 
 requirements:
 	pip3 install wheel

@@ -1,5 +1,5 @@
 esphome:
-  name: m5stack_air_quality
+  name: m5stack-air-quality
   platform: ESP32
   board: m5stack-core-esp32
   libraries:

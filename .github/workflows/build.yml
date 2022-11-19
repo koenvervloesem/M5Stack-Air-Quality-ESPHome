@@ -13,5 +13,5 @@ jobs:
       - name: Build ESPHome firmware to verify configuration
         uses: esphome/build-action@v1.5.0
         with:
-          yaml_file: m5stack_air_quality.yaml
+          yaml_file: m5stack-air-quality-kit.yaml
           version: 2022.11.0
