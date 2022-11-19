@@ -10,12 +10,7 @@ This [ESPHome](https://esphome.io) configuration builds firmware for M5Stack's [
 
 ![ESPHome configuration for the M5Stack air quality kit](https://github.com/koenvervloesem/M5Stack-Air-Quality-ESPHome/raw/main/m5stack-air-quality-kit-esphome.jpg)
 
-## Requirements
-
-* M5Stack's [PM2.5 Air Quality Kit (PMSA003 + SHT20)](https://m5stack.com/products/pm-2-5-sensor-usb-power-sht20)
-* ESPHome 1.16.0 or later.
-
-The SHT20 sensor is not supported by ESPHome, but this repository adds a custom component that's using the Arduino library [uFire_SHT20](https://github.com/u-fire/uFire_SHT20) which supports the sensor.
+Note that ESPHome doesn't support the SHT20 sensornatively. This repository adds a custom component that's using the Arduino library [uFire_SHT20](https://github.com/u-fire/uFire_SHT20) which supports the sensor.
 
 ## Usage
 
@@ -24,8 +19,6 @@ Compile and upload the firmware to your M5Stack air quality kit with:
 ```shell
 esphome run m5stack-air-quality-kit.yaml
 ```
-
-The YAML file doesn't configure any Wi-Fi connection, MQTT broker or native API for Home Assistant. You can add this yourself. The configuration has been tested extensively with MQTT. If you have set up Home Assistant MQTT discovery, the sensors of the device even automatically show up in Home Assistant.
 
 The middle button is used to toggle the display's backlight on and off.
 
@@ -50,7 +43,7 @@ If you want to learn more about ESPHome, read my book [Getting Started with ESPH
 
 This project is provided by [Koen Vervloesem](mailto:koen@vervloesem.eu) as open source software with the MIT license. See the [LICENSE](LICENSE) file for more information.
 
-The included Roboto font is licensed under the [Apache License, Version 2.0](https://fonts.google.com/specimen/Roboto#license).
+The Roboto font is licensed under the [Apache License, Version 2.0](https://fonts.google.com/specimen/Roboto#license).
 
 The uFire_SHT20 library is licensed under the MIT license.
 

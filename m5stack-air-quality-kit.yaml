@@ -1,7 +1,18 @@
+substitutions:
+  name: "m5stack-air-quality-kit"
+
 esphome:
-  name: m5stack-air-quality
-  platform: ESP32
-  board: m5stack-core-esp32
+  name: "${name}"
+  # Automatically add the mac address to the name
+  # so you can use a single firmware for all devices
+  name_add_mac_suffix: true
+
+  # This will allow for (future) project identification,
+  # configuration and updates.
+  project:
+    name: koenvervloesem.m5stack-air-quality-kit
+    version: "1.0"
+
   libraries:
     - "Wire"
     - "uFire SHT20"
@@ -9,7 +20,41 @@ esphome:
   includes:
     - include/sht20.h
 
+esp32:
+  board: m5stack-core-esp32
+  framework:
+    type: arduino
+
+# To be able to get logs from the device via serial and api.
 logger:
+
+# API is a requirement of the dashboard import.
+api:
+
+# OTA is required for Over-the-Air updating
+ota:
+
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: github://koenvervloesem/M5Stack-Air-Quality-ESPHome/m5stack-air-quality-kit.yaml@main
+
+wifi:
+  # Set up a Wi-Fi access point using the device name above
+  ap:
+    password: "12345678"
+
+# In combination with the `ap` this allows the user
+# to provision Wi-Fi credentials to the device.
+captive_portal:
+
+# Sets up Bluetooth LE on ESP32 to allow the user
+# to provision Wi-Fi credentials to the device.
+esp32_improv:
+  authorizer: none
+
+# Sets up the improv via serial client for Wi-Fi provisioning.
+# Handy if your device has a usb port for the user to add credentials when they first get it.
+improv_serial:
 
 # Define I/O: UART, I²C and SPI
 uart:
@@ -94,9 +139,8 @@ switch:
     id: backlight
     restore_mode: ALWAYS_ON
 
-# Download Roboto font from https://fonts.google.com/specimen/Roboto
 font:
-  - file: "fonts/Roboto-Medium.ttf"
+  - file: "gfonts://Roboto@medium"
     id: font_roboto_medium22
     size: 22
     glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
