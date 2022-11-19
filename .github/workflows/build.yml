@@ -4,14 +4,14 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    name: Build ESPHome firmware
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Install setuptools
-        run: sudo apt install python3-setuptools
-      - name: Install requirements
-        run: sudo make requirements
-      - name: Build code
-        run: make build
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Build ESPHome firmware to verify configuration
+        uses: esphome/build-action@v1.5.0
+        with:
+          yaml_file: m5stack_air_quality.yaml
+          version: 2022.11.0
