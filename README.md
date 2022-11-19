@@ -8,17 +8,21 @@ This [ESPHome](https://esphome.io) configuration builds firmware for M5Stack's [
 * The amount of particulate matter (PM1, PM2.5 and PM10).
 * The temperature and humidity, as well as the computed vapour-pressure deficit and dew point.
 
-![ESPHome configuration for the M5Stack air quality kit](https://github.com/koenvervloesem/M5Stack-Air-Quality-ESPHome/raw/main/m5stack-air-quality-kit-esphome.jpg)
+![ESPHome configuration for the M5Stack air quality kit](static/m5stack-air-quality-kit-esphome.jpg)
 
-Note that ESPHome doesn't support the SHT20 sensornatively. This repository adds a custom component that's using the Arduino library [uFire_SHT20](https://github.com/u-fire/uFire_SHT20) which supports the sensor.
+Note that ESPHome doesn't support the SHT20 sensor natively. This repository adds a custom component that's using the Arduino library [uFire_SHT20](https://github.com/u-fire/uFire_SHT20) which supports the sensor.
 
-## Usage
+## Installation
 
-Compile and upload the firmware to your M5Stack air quality kit with:
+On a web browser supporting [Web Serial](https://caniuse.com/web-serial) (which is a recent Chrome, Edge or Opera) you can install the latest version of the firmware on your M5Stack air quality kit from our [installation page](https://koenvervloesem.github.io/M5Stack-Air-Quality-ESPHome/), as well as setting up Wi-Fi and adding the device to Home Assistant.
+
+You can also manually compile and upload the firmware to your M5Stack air quality kit with:
 
 ```shell
 esphome run m5stack-air-quality-kit.yaml
 ```
+
+## Usage
 
 The middle button is used to toggle the display's backlight on and off.
 

@@ -49,8 +49,10 @@ captive_portal:
 
 # Sets up Bluetooth LE on ESP32 to allow the user
 # to provision Wi-Fi credentials to the device.
-esp32_improv:
-  authorizer: none
+# TODO: Disable this for now, as it results in Wi-Fi not being set up.
+# Error: "create wifi task: failed to create task"
+#esp32_improv:
+#  authorizer: none
 
 # Sets up the improv via serial client for Wi-Fi provisioning.
 # Handy if your device has a usb port for the user to add credentials when they first get it.
