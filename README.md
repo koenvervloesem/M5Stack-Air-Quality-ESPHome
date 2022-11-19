@@ -14,7 +14,7 @@ Note that ESPHome doesn't support the SHT20 sensor natively. This repository add
 
 ## Installation
 
-On a web browser supporting [Web Serial](https://caniuse.com/web-serial) (which is a recent Chrome, Edge or Opera) you can install the latest version of the firmware on your M5Stack air quality kit from our [installation page](https://koenvervloesem.github.io/M5Stack-Air-Quality-ESPHome/), as well as setting up Wi-Fi and adding the device to Home Assistant.
+On a web browser supporting [Web Serial](https://caniuse.com/web-serial) (which is a recent Chrome, Edge or Opera) you can install the latest version of the firmware on your M5Stack air quality kit from our [installation page](https://koenvervloesem.github.io/M5Stack-Air-Quality-ESPHome/) via USB, as well as setting up Wi-Fi and adding the device to Home Assistant.
 
 You can also manually compile and upload the firmware to your M5Stack air quality kit with:
 
