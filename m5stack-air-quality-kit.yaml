@@ -131,15 +131,7 @@ binary_sensor:
       inverted: true
     on_click:
       then:
-        - switch.toggle: backlight
-
-# GPIO pin of the display backlight
-switch:
-  - platform: gpio
-    pin: 32
-    name: "Backlight"
-    id: backlight
-    restore_mode: ALWAYS_ON
+        - light.toggle: back_light
 
 font:
   - file: "gfonts://Roboto@medium"
@@ -161,13 +153,25 @@ color:
     green: 100%
     blue: 100%
 
+# GPIO pin of the display backlight
+output:
+  - platform: ledc
+    pin: 32
+    id: gpio_32_backlight_pwm
+    
+light:
+  - platform: monochromatic
+    output: gpio_32_backlight_pwm
+    name: "Display Backlight"
+    id: back_light
+    restore_mode: ALWAYS_ON
+    
 display:
-  - platform: ili9341
+  - platform: ili9xxx
     id: m5stack_display
     model: M5Stack
     cs_pin: 14
     dc_pin: 27
-    led_pin: 32
     reset_pin: 33
     rotation: 0
     lambda: |-
