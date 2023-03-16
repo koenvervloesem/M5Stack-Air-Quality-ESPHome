@@ -131,15 +131,7 @@ binary_sensor:
       inverted: true
     on_click:
       then:
-        - switch.toggle: backlight
-
-# GPIO pin of the display backlight
-switch:
-  - platform: gpio
-    pin: 32
-    name: "Backlight"
-    id: backlight
-    restore_mode: ALWAYS_ON
+        - light.toggle: back_light
 
 font:
   - file: "gfonts://Roboto@medium"
@@ -160,12 +152,13 @@ color:
     red: 100%
     green: 100%
     blue: 100%
-    
+
+# GPIO pin of the display backlight
 output:
   - platform: ledc
     pin: 32
     id: gpio_32_backlight_pwm
-
+    
 light:
   - platform: monochromatic
     output: gpio_32_backlight_pwm
