@@ -160,14 +160,25 @@ color:
     red: 100%
     green: 100%
     blue: 100%
+    
+output:
+  - platform: ledc
+    pin: 32
+    id: gpio_32_backlight_pwm
 
+light:
+  - platform: monochromatic
+    output: gpio_32_backlight_pwm
+    name: "Display Backlight"
+    id: back_light
+    restore_mode: ALWAYS_ON
+    
 display:
-  - platform: ili9341
+  - platform: ili9xxx
     id: m5stack_display
     model: M5Stack
     cs_pin: 14
     dc_pin: 27
-    led_pin: 32
     reset_pin: 33
     rotation: 0
     lambda: |-
